@@ -1,0 +1,44 @@
+bash: train.sh: No such file or directory
+Some weights of the model checkpoint at /data1/qd/noise_master/pre_train_models/bert-base-uncased were not used when initializing BertModel: ['cls.seq_relationship.weight', 'cls.predictions.decoder.weight', 'cls.predictions.transform.LayerNorm.weight', 'cls.seq_relationship.bias', 'cls.predictions.transform.dense.weight', 'cls.predictions.bias', 'cls.predictions.transform.dense.bias', 'cls.predictions.transform.LayerNorm.bias']
+- This IS expected if you are initializing BertModel from the checkpoint of a model trained on another task or with another architecture (e.g. initializing a BertForSequenceClassification model from a BertForPreTraining model).
+- This IS NOT expected if you are initializing BertModel from the checkpoint of a model that you expect to be exactly identical (initializing a BertForSequenceClassification model from a BertForSequenceClassification model).
+Traceback (most recent call last):
+  File "/home/qd/code/noise_master/train_base.py", line 146, in <module>
+    train_step(config, args, mymodel, optimizer, loss_func, train_data, valid_data=valid_data)
+  File "/home/qd/code/noise_master/train_base.py", line 42, in train_step
+    out = mymodel(input_ids, attention_mask, is_training=True)
+  File "/home/qd/anaconda3/envs/noise1/lib/python3.8/site-packages/torch/nn/modules/module.py", line 1102, in _call_impl
+    return forward_call(*input, **kwargs)
+  File "/home/qd/anaconda3/envs/noise1/lib/python3.8/site-packages/torch/nn/parallel/data_parallel.py", line 166, in forward
+    return self.module(*inputs[0], **kwargs[0])
+  File "/home/qd/anaconda3/envs/noise1/lib/python3.8/site-packages/torch/nn/modules/module.py", line 1102, in _call_impl
+    return forward_call(*input, **kwargs)
+  File "/home/qd/code/noise_master/model/bert.py", line 21, in forward
+    x = self.encoder(input_id, attention_mask)[0]
+  File "/home/qd/anaconda3/envs/noise1/lib/python3.8/site-packages/torch/nn/modules/module.py", line 1102, in _call_impl
+    return forward_call(*input, **kwargs)
+  File "/home/qd/anaconda3/envs/noise1/lib/python3.8/site-packages/transformers/models/bert/modeling_bert.py", line 996, in forward
+    encoder_outputs = self.encoder(
+  File "/home/qd/anaconda3/envs/noise1/lib/python3.8/site-packages/torch/nn/modules/module.py", line 1102, in _call_impl
+    return forward_call(*input, **kwargs)
+  File "/home/qd/anaconda3/envs/noise1/lib/python3.8/site-packages/transformers/models/bert/modeling_bert.py", line 583, in forward
+    layer_outputs = layer_module(
+  File "/home/qd/anaconda3/envs/noise1/lib/python3.8/site-packages/torch/nn/modules/module.py", line 1102, in _call_impl
+    return forward_call(*input, **kwargs)
+  File "/home/qd/anaconda3/envs/noise1/lib/python3.8/site-packages/transformers/models/bert/modeling_bert.py", line 511, in forward
+    layer_output = apply_chunking_to_forward(
+  File "/home/qd/anaconda3/envs/noise1/lib/python3.8/site-packages/transformers/modeling_utils.py", line 2349, in apply_chunking_to_forward
+    return forward_fn(*input_tensors)
+  File "/home/qd/anaconda3/envs/noise1/lib/python3.8/site-packages/transformers/models/bert/modeling_bert.py", line 523, in feed_forward_chunk
+    intermediate_output = self.intermediate(attention_output)
+  File "/home/qd/anaconda3/envs/noise1/lib/python3.8/site-packages/torch/nn/modules/module.py", line 1102, in _call_impl
+    return forward_call(*input, **kwargs)
+  File "/home/qd/anaconda3/envs/noise1/lib/python3.8/site-packages/transformers/models/bert/modeling_bert.py", line 424, in forward
+    hidden_states = self.dense(hidden_states)
+  File "/home/qd/anaconda3/envs/noise1/lib/python3.8/site-packages/torch/nn/modules/module.py", line 1102, in _call_impl
+    return forward_call(*input, **kwargs)
+  File "/home/qd/anaconda3/envs/noise1/lib/python3.8/site-packages/torch/nn/modules/linear.py", line 103, in forward
+    return F.linear(input, self.weight, self.bias)
+  File "/home/qd/anaconda3/envs/noise1/lib/python3.8/site-packages/torch/nn/functional.py", line 1848, in linear
+    return torch._C._nn.linear(input, weight, bias)
+RuntimeError: CUDA out of memory. Tried to allocate 140.00 MiB (GPU 0; 23.69 GiB total capacity; 4.80 GiB already allocated; 81.94 MiB free; 4.91 GiB reserved in total by PyTorch) If reserved memory is >> allocated memory try setting max_split_size_mb to avoid fragmentation.  See documentation for Memory Management and PYTORCH_CUDA_ALLOC_CONF
