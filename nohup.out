@@ -42,3 +42,65 @@ Traceback (most recent call last):
   File "/home/qd/anaconda3/envs/noise1/lib/python3.8/site-packages/torch/nn/functional.py", line 1848, in linear
     return torch._C._nn.linear(input, weight, bias)
 RuntimeError: CUDA out of memory. Tried to allocate 140.00 MiB (GPU 0; 23.69 GiB total capacity; 4.80 GiB already allocated; 81.94 MiB free; 4.91 GiB reserved in total by PyTorch) If reserved memory is >> allocated memory try setting max_split_size_mb to avoid fragmentation.  See documentation for Memory Management and PYTORCH_CUDA_ALLOC_CONF
+Some weights of the model checkpoint at /data1/lxb/qd/noise_master/pre_train_models/bert-base-uncased were not used when initializing BertModel: ['cls.predictions.transform.LayerNorm.weight', 'cls.predictions.decoder.weight', 'cls.seq_relationship.bias', 'cls.predictions.transform.dense.weight', 'cls.predictions.transform.dense.bias', 'cls.predictions.bias', 'cls.seq_relationship.weight', 'cls.predictions.transform.LayerNorm.bias']
+- This IS expected if you are initializing BertModel from the checkpoint of a model trained on another task or with another architecture (e.g. initializing a BertForSequenceClassification model from a BertForPreTraining model).
+- This IS NOT expected if you are initializing BertModel from the checkpoint of a model that you expect to be exactly identical (initializing a BertForSequenceClassification model from a BertForSequenceClassification model).
+Some weights of the model checkpoint at /data1/lxb/qd/noise_master/pre_train_models/bert-base-uncased were not used when initializing BertModel: ['cls.predictions.transform.LayerNorm.bias', 'cls.predictions.decoder.weight', 'cls.seq_relationship.bias', 'cls.predictions.transform.LayerNorm.weight', 'cls.predictions.transform.dense.weight', 'cls.predictions.bias', 'cls.seq_relationship.weight', 'cls.predictions.transform.dense.bias']
+- This IS expected if you are initializing BertModel from the checkpoint of a model trained on another task or with another architecture (e.g. initializing a BertForSequenceClassification model from a BertForPreTraining model).
+- This IS NOT expected if you are initializing BertModel from the checkpoint of a model that you expect to be exactly identical (initializing a BertForSequenceClassification model from a BertForSequenceClassification model).
+Traceback (most recent call last):
+  File "/home/lxb/qd/noise/Noise_Learning/train_cl.py", line 179, in <module>
+    lnl.fit(X_train, y_train)
+  File "/home/lxb/.conda/envs/noise1/lib/python3.7/site-packages/cleanlab/classification.py", line 330, in fit
+    seed=self.seed,
+  File "/home/lxb/.conda/envs/noise1/lib/python3.7/site-packages/cleanlab/latent_estimation.py", line 705, in estimate_py_noise_matrices_and_cv_pred_proba
+    seed=seed,
+  File "/home/lxb/.conda/envs/noise1/lib/python3.7/site-packages/cleanlab/latent_estimation.py", line 618, in estimate_confident_joint_and_cv_pred_proba
+    clf_copy.fit(X_train_cv, s_train_cv)
+  File "/home/lxb/qd/noise/Noise_Learning/train_cl.py", line 83, in fit
+    output = self.model(data, attmsk, is_training=True)
+  File "/home/lxb/.conda/envs/noise1/lib/python3.7/site-packages/torch/nn/modules/module.py", line 1102, in _call_impl
+    return forward_call(*input, **kwargs)
+  File "/home/lxb/.conda/envs/noise1/lib/python3.7/site-packages/torch/nn/parallel/data_parallel.py", line 166, in forward
+    return self.module(*inputs[0], **kwargs[0])
+  File "/home/lxb/.conda/envs/noise1/lib/python3.7/site-packages/torch/nn/modules/module.py", line 1102, in _call_impl
+    return forward_call(*input, **kwargs)
+  File "/home/lxb/qd/noise/Noise_Learning/model/bert.py", line 21, in forward
+    x = self.encoder(input_id, attention_mask)[0]
+  File "/home/lxb/.conda/envs/noise1/lib/python3.7/site-packages/torch/nn/modules/module.py", line 1102, in _call_impl
+    return forward_call(*input, **kwargs)
+  File "/home/lxb/.conda/envs/noise1/lib/python3.7/site-packages/transformers/models/bert/modeling_bert.py", line 1006, in forward
+    return_dict=return_dict,
+  File "/home/lxb/.conda/envs/noise1/lib/python3.7/site-packages/torch/nn/modules/module.py", line 1102, in _call_impl
+    return forward_call(*input, **kwargs)
+  File "/home/lxb/.conda/envs/noise1/lib/python3.7/site-packages/transformers/models/bert/modeling_bert.py", line 590, in forward
+    output_attentions,
+  File "/home/lxb/.conda/envs/noise1/lib/python3.7/site-packages/torch/nn/modules/module.py", line 1102, in _call_impl
+    return forward_call(*input, **kwargs)
+  File "/home/lxb/.conda/envs/noise1/lib/python3.7/site-packages/transformers/models/bert/modeling_bert.py", line 512, in forward
+    self.feed_forward_chunk, self.chunk_size_feed_forward, self.seq_len_dim, attention_output
+  File "/home/lxb/.conda/envs/noise1/lib/python3.7/site-packages/transformers/modeling_utils.py", line 2360, in apply_chunking_to_forward
+    return forward_fn(*input_tensors)
+  File "/home/lxb/.conda/envs/noise1/lib/python3.7/site-packages/transformers/models/bert/modeling_bert.py", line 523, in feed_forward_chunk
+    intermediate_output = self.intermediate(attention_output)
+  File "/home/lxb/.conda/envs/noise1/lib/python3.7/site-packages/torch/nn/modules/module.py", line 1102, in _call_impl
+    return forward_call(*input, **kwargs)
+  File "/home/lxb/.conda/envs/noise1/lib/python3.7/site-packages/transformers/models/bert/modeling_bert.py", line 425, in forward
+    hidden_states = self.intermediate_act_fn(hidden_states)
+  File "/home/lxb/.conda/envs/noise1/lib/python3.7/site-packages/torch/nn/functional.py", line 1556, in gelu
+    return torch._C._nn.gelu(input)
+RuntimeError: CUDA out of memory. Tried to allocate 144.00 MiB (GPU 0; 39.59 GiB total capacity; 16.90 GiB already allocated; 62.50 MiB free; 17.31 GiB reserved in total by PyTorch) If reserved memory is >> allocated memory try setting max_split_size_mb to avoid fragmentation.  See documentation for Memory Management and PYTORCH_CUDA_ALLOC_CONF
+Some weights of the model checkpoint at /data1/lxb/qd/noise_master/pre_train_models/bert-base-uncased were not used when initializing BertModel: ['cls.predictions.decoder.weight', 'cls.predictions.transform.LayerNorm.weight', 'cls.seq_relationship.bias', 'cls.seq_relationship.weight', 'cls.predictions.transform.LayerNorm.bias', 'cls.predictions.bias', 'cls.predictions.transform.dense.bias', 'cls.predictions.transform.dense.weight']
+- This IS expected if you are initializing BertModel from the checkpoint of a model trained on another task or with another architecture (e.g. initializing a BertForSequenceClassification model from a BertForPreTraining model).
+- This IS NOT expected if you are initializing BertModel from the checkpoint of a model that you expect to be exactly identical (initializing a BertForSequenceClassification model from a BertForSequenceClassification model).
+Some weights of the model checkpoint at /data1/lxb/qd/noise_master/pre_train_models/bert-base-uncased were not used when initializing BertModel: ['cls.seq_relationship.weight', 'cls.seq_relationship.bias', 'cls.predictions.transform.LayerNorm.weight', 'cls.predictions.transform.dense.bias', 'cls.predictions.bias', 'cls.predictions.decoder.weight', 'cls.predictions.transform.LayerNorm.bias', 'cls.predictions.transform.dense.weight']
+- This IS expected if you are initializing BertModel from the checkpoint of a model trained on another task or with another architecture (e.g. initializing a BertForSequenceClassification model from a BertForPreTraining model).
+- This IS NOT expected if you are initializing BertModel from the checkpoint of a model that you expect to be exactly identical (initializing a BertForSequenceClassification model from a BertForSequenceClassification model).
+Some weights of the model checkpoint at /data1/lxb/qd/noise_master/pre_train_models/bert-base-uncased were not used when initializing BertModel: ['cls.predictions.bias', 'cls.predictions.transform.dense.weight', 'cls.predictions.decoder.weight', 'cls.seq_relationship.weight', 'cls.predictions.transform.LayerNorm.bias', 'cls.seq_relationship.bias', 'cls.predictions.transform.LayerNorm.weight', 'cls.predictions.transform.dense.bias']
+- This IS expected if you are initializing BertModel from the checkpoint of a model trained on another task or with another architecture (e.g. initializing a BertForSequenceClassification model from a BertForPreTraining model).
+- This IS NOT expected if you are initializing BertModel from the checkpoint of a model that you expect to be exactly identical (initializing a BertForSequenceClassification model from a BertForSequenceClassification model).
+Some weights of the model checkpoint at /data1/lxb/qd/noise_master/pre_train_models/bert-base-uncased were not used when initializing BertModel: ['cls.predictions.transform.dense.weight', 'cls.seq_relationship.weight', 'cls.predictions.transform.LayerNorm.bias', 'cls.predictions.transform.dense.bias', 'cls.seq_relationship.bias', 'cls.predictions.decoder.weight', 'cls.predictions.transform.LayerNorm.weight', 'cls.predictions.bias']
+- This IS expected if you are initializing BertModel from the checkpoint of a model trained on another task or with another architecture (e.g. initializing a BertForSequenceClassification model from a BertForPreTraining model).
+- This IS NOT expected if you are initializing BertModel from the checkpoint of a model that you expect to be exactly identical (initializing a BertForSequenceClassification model from a BertForSequenceClassification model).
+./script/train_cl.sh: line 21: h: command not found
+./script/train_cl.sh: line 21: h: command not found

@@ -1,7 +1,7 @@
 import progressbar as pbar
 from progressbar import DynamicMessage as DM
 from transformers import BertModel,AutoModel,AutoTokenizer,BertTokenizer,BartForConditionalGeneration
-from ckip_transformers.nlp import CkipWordSegmenter, CkipPosTagger, CkipNerChunker
+# from ckip_transformers.nlp import CkipWordSegmenter, CkipPosTagger, CkipNerChunker
 
 
 def get_progressbar(epoch,epochs, total, train):
@@ -16,7 +16,7 @@ def get_progressbar(epoch,epochs, total, train):
 
 def get_model_instance(name):
     if name == "bert_base":
-        return  AutoModel.from_pretrained("/data1/qd/noise_master/pre_train_models/bert-base-uncased")
+        return  AutoModel.from_pretrained("/data1/lxb/qd/noise_master/pre_train_models/bert-base-uncased")
     if name == "legal_bert":
         return  BertModel.from_pretrained("/data1/qd/save_model/chinese-legal-electra-small-discriminator")
     if name == "roberta":
@@ -28,7 +28,7 @@ def get_model_instance(name):
 
 def get_tokenizer_instance(name):
     if name == "bert_base":
-        return AutoTokenizer.from_pretrained("/data1/qd/noise_master/pre_train_models/bert-base-uncased")
+        return AutoTokenizer.from_pretrained("/data1/lxb/qd/noise_master/pre_train_models/bert-base-uncased")
     if name == "legal_bert":
         return BertTokenizer.from_pretrained("/data1/qd/save_model/chinese-legal-electra-small-discriminator")
     if name == "roberta":

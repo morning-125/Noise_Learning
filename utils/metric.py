@@ -11,3 +11,9 @@ def metric(preds,labels):
         recall_score(labels_flat,pred_flat,average="macro"), \
         f1_score(labels_flat, pred_flat,average="macro")
 
+
+def metric_cl(preds, labels, sample_weight):
+    return accuracy_score(preds, labels, sample_weight=sample_weight),\
+        precision_score(preds, labels, sample_weight=sample_weight, average="macro"), \
+        recall_score(preds, labels, sample_weight=sample_weight, average="macro"), \
+        f1_score(preds, labels, sample_weight=sample_weight, average="macro")

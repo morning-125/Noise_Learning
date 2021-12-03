@@ -38,6 +38,24 @@ def read_data(config, args, is_train, labels, titles, texts):
     data_loader=DataLoader(dataset=datasets,batch_size=BATCH_SIZE,shuffle=True,num_workers=5)
 
     return data_loader
+
+
+def read_data_cl(config, args, is_train, labels, titles, texts):
+    full_text = [i+"[SEP]"+j for (i,j) in zip(titles,texts)]
+    label_id = [i-1 for i in labels]
+    n_class = max(label_id)+1
+    config.set("data","label_class", n_class)
+    if is_train:
+        label_id = flip_label(label_id, n_class, args.noise_type, args.noise_ratio)
+    tokenizer = get_tokenizer_instance(config.get("model","pre_bert"))
+
+    token_id=tokenizer(full_text,padding=True,truncation=True,max_length=config.getint("data","sentence_len"),return_tensors='pt')
+
+    input_id = np.array(token_id["input_ids"])
+    attmsk_id = np.array(token_id["attention_mask"])
+    X = np.concatenate((input_id, attmsk_id), axis=1)
+    y = np.array(label_id)
+    return X, y
    
 
 def process_csv(data_path):
